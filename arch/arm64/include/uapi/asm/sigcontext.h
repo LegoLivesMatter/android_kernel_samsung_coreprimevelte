@@ -18,6 +18,15 @@
 
 #include <linux/types.h>
 
+/* Userland libraries (namely Marvell libgralloc) are compiled as 32-bit, where
+ * __uint128_t is not defined by default. */
+#ifndef CONFIG_64BIT
+typedef struct {
+	__u64 one;
+	__u64 two;
+} __uint128_t;
+#endif
+
 /*
  * Signal context structure - contains all info to do with the state
  * before the signal handler was invoked.
